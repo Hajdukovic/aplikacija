@@ -60,7 +60,16 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">Registracija kao:</label>
+                            <div class="col-md-6">
+                                <select name="role" id="role" class="form-control">
+                                    <option value="1" selected>Pacijent</option>
+                                    <option value="0">Liječnik</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br />
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

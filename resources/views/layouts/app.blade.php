@@ -47,12 +47,10 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Prijava') }}</a>
                                 </li>
                             @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registracija') }}</a>
-                                </li>
+                            @if (Auth::check()) 
+                            
                             @endif
+
                         @else
                            <li style="width:150px">
                            <a> Pozdrav, {{ Auth::user()->name }}</a>
@@ -60,12 +58,25 @@
                            <li style="width:100px">
                            <a href="{{ url('/') }}" class="text-sm text-gray-700 underline">Početna</a>
                            </li>
+                           @if (Auth::user()->role == 0)
                            <li style="width:150px">
                            <a href="{{ route('patient.create') }}" class="text-sm text-gray-700 underline">Dodaj pacijenta</a>
                            </li>
+                           @endif
+                           @if (Auth::user()->role == 2)
                            <li style="width:150px">
-                           <a href="{{ route('doctor.create') }}" class="text-sm text-gray-700 underline">Dodaj doktora</a>
+                           <a href="{{ route('doctor.create') }}" class="text-sm text-gray-700 underline">Dodaj liječnika</a>
                            </li>
+                           @endif
+
+                           @if (Auth::user()->role == 2)
+                            @if (Route::has('register'))
+                                <li style="width:150px">
+                                    <a href="{{ route('register') }}" class="text-sm text-gray-700 underline">{{ __('Registracija korisnika') }}</a>
+                                </li>
+                            @endif
+                            @endif
+
                                 <div >
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

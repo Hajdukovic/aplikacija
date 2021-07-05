@@ -14,4 +14,9 @@ class Doctor extends Model
     {
         return $this->belongsTo('App\Models\Location', 'location_id');
     }
+    
+    public function patient()
+    {
+        return $this->belongsTo('App\Models\Patient', 'patient_id');
+    }
 }
