@@ -20,22 +20,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth']], function() {
-    
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth']], function () {
 
-Route::get('/addpatient', 'App\Http\Controllers\PatientsController@create')->name('patient.create');
-Route::post('/addpatient', 'App\Http\Controllers\PatientsController@store')->name('patient.store');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/adddoctor', 'App\Http\Controllers\DoctorsController@create')->name('doctor.create');
-Route::post('/adddoctor', 'App\Http\Controllers\DoctorsController@store')->name('doctor.store');
+    Route::get('/addpatient', 'App\Http\Controllers\PatientsController@create')->name('patient.create');
+    Route::post('/addpatient', 'App\Http\Controllers\PatientsController@store')->name('patient.store');
 
-
-Route::get('/controls', 'App\Http\Controllers\ControlsController@index')->name('control.show');
-
-Route::get('/addcontrol', 'App\Http\Controllers\ControlsController@create')->name('control.create');
-Route::post('/addcontrol', 'App\Http\Controllers\ControlsController@store')->name('control.store');
+    Route::get('/adddoctor', 'App\Http\Controllers\DoctorsController@create')->name('doctor.create');
+    Route::post('/adddoctor', 'App\Http\Controllers\DoctorsController@store')->name('doctor.store');
 
 
+    Route::get('/controls', 'App\Http\Controllers\ControlsController@index')->name('control.show');
+
+    Route::get('/addcontrol', 'App\Http\Controllers\ControlsController@create')->name('control.create');
+    Route::post('/addcontrol', 'App\Http\Controllers\ControlsController@store')->name('control.store');
 });
-

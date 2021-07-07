@@ -8,9 +8,6 @@ use App\Models\Patient;
 use App\Models\Control;
 use Illuminate\Support\Facades\Auth;
 
-
-
-
 class ControlsController extends Controller
 {
     /**
@@ -25,13 +22,12 @@ class ControlsController extends Controller
         if (Auth::user()->role == 1) {
             $id = Patient::where('email', 'LIKE', '%' . $user_email . '%')->first()->id;
             $controls = Control::where('patient_id', 'LIKE', '%' . $id . '%')->get();
-        }
-        else{
+        } else {
             $id = Doctor::where('email', 'LIKE', '%' . $user_email . '%')->first()->id;
             $controls = Control::where('doctor_id', 'LIKE', '%' . $id . '%')->get();
         };
-        
-        return view('/controls',['controls'=>$controls]);
+
+        return view('/controls', ['controls' => $controls]);
     }
 
     /**
@@ -40,23 +36,21 @@ class ControlsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   $user = Auth::user();
+    {
+        $user = Auth::user();
         $user_email = $user->email;
         if (Auth::user()->role == 1) {
             $id = Patient::where('email', 'LIKE', '%' . $user_email . '%')->first()->id;
             $patients = Patient::where('id', 'LIKE', '%' . $id . '%')->get();
             $doctor_id = Patient::where('id', 'LIKE', '%' . $id . '%')->first()->doctor_id;
             $doctors = Doctor::where('id', 'LIKE', '%' . $doctor_id . '%')->get();
-
-        }
-        else{
+        } else {
             $id = Doctor::where('email', 'LIKE', '%' . $user_email . '%')->first()->id;
             $patients = Patient::where('doctor_id', 'LIKE', '%' . $id . '%')->get();
             $doctors = Doctor::where('id', 'LIKE', '%' . $id . '%')->get();
+        }
 
-        }       
-
-        return view('addcontrol',['patients'=>$patients, 'doctors'=>$doctors]);
+        return view('addcontrol', ['patients' => $patients, 'doctors' => $doctors]);
     }
 
     /**

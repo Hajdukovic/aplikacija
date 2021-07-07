@@ -30,7 +30,7 @@ class DoctorsController extends Controller
     {
         $locations = DB::select('select * from locations');
 
-        return view('adddoctor',['locations'=>$locations]);
+        return view('adddoctor', ['locations' => $locations]);
     }
 
     /**

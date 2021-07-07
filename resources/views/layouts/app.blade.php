@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +22,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -42,52 +44,51 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Prijava') }}</a>
-                                </li>
-                            @endif
-                            @if (Auth::check()) 
-                            
-                            @endif
+                        @if (Route::has('login'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Prijava') }}</a>
+                        </li>
+                        @endif
+                        @if (Auth::check())
+
+                        @endif
 
                         @else
-                           <li style="width:150px">
-                           <a> Pozdrav, {{ Auth::user()->name }}</a>
-                            </li>
-                           <li style="width:100px">
-                           <a href="{{ url('/') }}" class="text-sm text-gray-700 underline">Početna</a>
-                           </li>
-                           @if (Auth::user()->role == 0)
-                           <li style="width:150px">
-                           <a href="{{ route('patient.create') }}" class="text-sm text-gray-700 underline">Dodaj pacijenta</a>
-                           </li>
-                           @endif
-                           @if (Auth::user()->role == 2)
-                           <li style="width:150px">
-                           <a href="{{ route('doctor.create') }}" class="text-sm text-gray-700 underline">Dodaj liječnika</a>
-                           </li>
-                           @endif
+                        <li style="width:150px">
+                            <a> Pozdrav, {{ Auth::user()->name }}</a>
+                        </li>
+                        <li style="width:100px">
+                            <a href="{{ url('/') }}" class="text-sm text-gray-700 underline">Početna</a>
+                        </li>
+                        @if (Auth::user()->role == 0)
+                        <li style="width:150px">
+                            <a href="{{ route('patient.create') }}" class="text-sm text-gray-700 underline">Dodaj pacijenta</a>
+                        </li>
+                        @endif
+                        @if (Auth::user()->role == 2)
+                        <li style="width:150px">
+                            <a href="{{ route('doctor.create') }}" class="text-sm text-gray-700 underline">Dodaj liječnika</a>
+                        </li>
+                        @endif
 
-                           @if (Auth::user()->role == 2)
-                            @if (Route::has('register'))
-                                <li style="width:150px">
-                                    <a href="{{ route('register') }}" class="text-sm text-gray-700 underline">{{ __('Registracija korisnika') }}</a>
-                                </li>
-                            @endif
-                            @endif
+                        @if (Auth::user()->role == 2)
+                        @if (Route::has('register'))
+                        <li style="width:150px">
+                            <a href="{{ route('register') }}" class="text-sm text-gray-700 underline">{{ __('Registracija korisnika') }}</a>
+                        </li>
+                        @endif
+                        @endif
 
-                                <div >
-                                    <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                        <div>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Odjava') }}
-                                    </a>
+                                {{ __('Odjava') }}
+                            </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
                         @endguest
                     </ul>
                 </div>
@@ -99,4 +100,5 @@
         </main>
     </div>
 </body>
+
 </html>

@@ -2,6 +2,7 @@
 
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -29,8 +30,7 @@ class PatientsController extends Controller
         $locations = DB::select('select * from locations');
         $doctors = Doctor::get();
 
-        return view('addpatient',['locations'=>$locations, 'doctors'=>$doctors]);
-    
+        return view('addpatient', ['locations' => $locations, 'doctors' => $doctors]);
     }
 
     /**

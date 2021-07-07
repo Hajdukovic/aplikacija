@@ -26,7 +26,7 @@
                         <div class="form-group row">
                             <label for="birth_date" class="col-md-4 col-form-label text-md-right">Datum rođenja:</label>
                             <div class="col-md-6">
-                            <input type="date" id="birth_date" name="birth_date" required pattern="\d{4}-\d{2}-\d{2}">
+                                <input type="date" id="birth_date" name="birth_date" required pattern="\d{4}-\d{2}-\d{2}">
                             </div>
                         </div>
                         <br />
@@ -58,44 +58,44 @@
                                 </select>
                             </div>
                         </div>
-                        <br/>
+                        <br />
                         <div class="form-group row">
                             <label for="gender" class="col-md-4 col-form-label text-md-right">Spol:</label>
                             <div class="col-md-6">
-                            <input type="radio" id="musko" name="gender" value="musko">
-                            <label for="gender">Muško</label>
-                            <input type="radio" id="zensko" name="gender" value="zensko">
-                            <label for="gender">Žensko</label>
-                        </div>
-                        <br/>
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">E-mail</label>
-                            <div class="col-md-6">
-                                <input id="email" type="text" class="form-control" name="email" required>
+                                <input type="radio" id="musko" name="gender" value="musko">
+                                <label for="gender">Muško</label>
+                                <input type="radio" id="zensko" name="gender" value="zensko">
+                                <label for="gender">Žensko</label>
                             </div>
-                        </div>
-                        <br/><br/>
-                        <div class="form-group row">
-                            <label for="phone" class="col-md-4 col-form-label text-md-right">Kontakt broj:</label>
-                            <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control" name="phone" required>
+                            <br />
+                            <div class="form-group row">
+                                <label for="email" class="col-md-4 col-form-label text-md-right">E-mail</label>
+                                <div class="col-md-6">
+                                    <input id="email" type="text" class="form-control" name="email" required>
+                                </div>
                             </div>
-                        </div>
-                        <br/><br/><br/>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" name="save" class="btn btn-primary">
-                                    Dodaj pacijenta
-                                </button>
+                            <br /><br />
+                            <div class="form-group row">
+                                <label for="phone" class="col-md-4 col-form-label text-md-right">Kontakt broj:</label>
+                                <div class="col-md-6">
+                                    <input id="phone" type="text" class="form-control" name="phone" required>
+                                </div>
                             </div>
-                        </div>
-                    </form> 
+                            <br /><br /><br />
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" name="save" class="btn btn-primary">
+                                        Dodaj pacijenta
+                                    </button>
+                                </div>
+                            </div>
+                    </form>
                 </div>
             </div>
-            <br/>
+            <br />
         </div>
-       
-       
+
+
     </div>
 </div>
 @endsection
