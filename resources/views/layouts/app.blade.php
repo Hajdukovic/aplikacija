@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Aplikacija za praćenje stanja pacijenata') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('/app.js') }}" defer></script>
+    <script src="{{ asset('/app.css') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,7 +23,7 @@
 
 </head>
 
-<body>
+<body style='background-image: url("../pictures/pozadina.png"); background-position: center; background-repeat: no-repeat; background-size: cover;'>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -54,37 +54,36 @@
                         @endif
 
                         @else
+
                         <li style="width:150px">
-                            <a> Pozdrav, {{ Auth::user()->name }}</a>
+
+                            <a href="{{ url('/') }}"> <img src="../pictures/pocetna.png" alt="pocetna" width="50" height="50"> Početna</a>
                         </li>
-                        <li style="width:100px">
-                            <a href="{{ url('/') }}" class="text-sm text-gray-700 underline">Početna</a>
-                        </li>
-                        <li style="width:100px">
-                            <a href="{{ route('profile.show') }}" class="text-sm text-gray-700 underline">Profil</a>
+                        <li style="width:150px">
+                            <a href="{{ route('profile.show') }}"><img src="../pictures/profil.png" alt="profil" width="50" height="50">Profil</a>
                         </li>
                         @if (Auth::user()->role == 0)
-                        <li style="width:150px">
-                            <a href="{{ route('patient.create') }}" class="text-sm text-gray-700 underline">Dodaj pacijenta</a>
+                        <li style="width:200px">
+                            <a href="{{ route('patient.create') }}" class="text-sm text-gray-700 "><img src="../pictures/patient.png" alt="pacijent" width="50" height="50">Dodaj pacijenta</a>
                         </li>
                         @endif
                         @if (Auth::user()->role == 2)
-                        <li style="width:150px">
-                            <a href="{{ route('doctor.create') }}" class="text-sm text-gray-700 underline">Dodaj liječnika</a>
+                        <li style="width:200px">
+                            <a href="{{ route('doctor.create') }}" class="text-sm text-gray-700 "><img src="../pictures/patient.png" alt="doktor" width="50" height="50">Dodaj liječnika</a>
                         </li>
                         @endif
 
                         @if (Auth::user()->role == 2)
                         @if (Route::has('register'))
-                        <li style="width:200px">
-                            <a href="{{ route('register') }}" class="text-sm text-gray-700 underline">{{ __('Registracija korisnika') }}</a>
+                        <li style="width:250px">
+                            <a href="{{ route('register') }}" class="text-sm text-gray-700 "><img src="../pictures/patient.png" alt="registracija" width="50" height="50">{{ __('Registracija korisnika') }}</a>
                         </li>
                         @endif
                         @endif
 
-                        <div>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                        <div style="width:150px">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <img src="../pictures/odjava.png" alt="odjava" width="50" height="50">
                                 {{ __('Odjava') }}
                             </a>
 
@@ -92,6 +91,9 @@
                                 @csrf
                             </form>
                         </div>
+                        <li style="width:200px">
+                            <a> <img src="../pictures/pozdrav.png" alt="pozdrav" width="50" height="50">Pozdrav, {{ Auth::user()->name }}</a>
+                        </li>
                         @endguest
                     </ul>
                 </div>
