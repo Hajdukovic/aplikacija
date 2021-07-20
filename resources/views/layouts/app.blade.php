@@ -60,6 +60,9 @@
                         <li style="width:100px">
                             <a href="{{ url('/') }}" class="text-sm text-gray-700 underline">Početna</a>
                         </li>
+                        <li style="width:100px">
+                            <a href="{{ route('profile.show') }}" class="text-sm text-gray-700 underline">Profil</a>
+                        </li>
                         @if (Auth::user()->role == 0)
                         <li style="width:150px">
                             <a href="{{ route('patient.create') }}" class="text-sm text-gray-700 underline">Dodaj pacijenta</a>
@@ -73,7 +76,7 @@
 
                         @if (Auth::user()->role == 2)
                         @if (Route::has('register'))
-                        <li style="width:150px">
+                        <li style="width:200px">
                             <a href="{{ route('register') }}" class="text-sm text-gray-700 underline">{{ __('Registracija korisnika') }}</a>
                         </li>
                         @endif

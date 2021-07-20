@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Doctor;
+use App\Models\Patient;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +21,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+
+
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -35,4 +39,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/addcontrol', 'App\Http\Controllers\ControlsController@create')->name('control.create');
     Route::post('/addcontrol', 'App\Http\Controllers\ControlsController@store')->name('control.store');
+
+    Route::get('/profile', 'App\Http\Controllers\HomeController@profile')->name('profile.show');
+
+    Route::get('/patient', 'App\Http\Controllers\PatientsController@show')->name('patient.show');
+    Route::post('/controlsshow', 'App\Http\Controllers\PatientsController@controlsshow')->name('control.showall');
+
 });

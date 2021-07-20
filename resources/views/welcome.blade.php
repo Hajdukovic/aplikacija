@@ -8,6 +8,13 @@
 
     <a href="{{ route('control.show') }}" style="width: 25%" class="btn btn-outline-primary" role="button" aria-pressed="true">Prikaz svih kontrola</a>
 
+    @if (Auth::user()->role == 0)
+    <a href="{{ route('patient.show') }}" style="width: 25%" class="btn btn-outline-primary" role="button" aria-pressed="true">Pretraga pacijenata</a>
+    @endif
+
 </fieldset>
+
+
+
 @endif
 @endsection('content')

@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Patient;
 use App\Models\Doctor;
+use App\Models\Control;
+use Illuminate\Support\Facades\Auth;
+
 
 class PatientsController extends Controller
 {
@@ -61,9 +64,26 @@ class PatientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $user = Auth::user();
+        $user_email = $user->email;
+        $id = Doctor::where('email', 'LIKE', '%' . $user_email . '%')->first()->id;
+        $patients = Patient::where('doctor_id', 'LIKE', '%' . $id . '%')->get();
+
+        return view('patient', ['patients' => $patients]);
+    }
+
+    public function controlsshow(Request $request)
+    {
+        $patient_id = $request->patient_id;
+        $start_date = $request->control_date1;
+        $end_date = $request->control_date2;
+
+        $patients = Patient::where('id', 'LIKE', '%' . $patient_id . '%')->get();
+        $controls = Control::where('patient_id', 'LIKE', '%' . $patient_id . '%')->whereBetween('created_at', [$start_date, $end_date])->get();
+
+        return view('/controlsshow', ['patients' => $patients, 'controls' => $controls]);
     }
 
     /**

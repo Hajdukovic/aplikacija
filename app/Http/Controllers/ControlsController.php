@@ -17,7 +17,9 @@ class ControlsController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
+        if (Auth::user()){
+
+            $user = Auth::user();
         $user_email = $user->email;
         if (Auth::user()->role == 1) {
             $id = Patient::where('email', 'LIKE', '%' . $user_email . '%')->first()->id;
@@ -28,6 +30,9 @@ class ControlsController extends Controller
         };
 
         return view('/controls', ['controls' => $controls]);
+        }   
+        else return view ('login');     
+        
     }
 
     /**
