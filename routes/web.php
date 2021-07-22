@@ -45,4 +45,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/patient', 'App\Http\Controllers\PatientsController@show')->name('patient.show');
     Route::post('/controlsshow', 'App\Http\Controllers\PatientsController@controlsshow')->name('control.showall');
 
+    Route::get('/patientsshow', 'App\Http\Controllers\PatientsController@patientsshow')->name('patients.showall');
+    Route::get('/doctorsshow', 'App\Http\Controllers\DoctorsController@doctorsshow')->name('doctors.showall');
+
+
 });

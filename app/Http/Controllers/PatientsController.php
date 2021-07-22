@@ -32,7 +32,6 @@ class PatientsController extends Controller
     {
         $locations = DB::select('select * from locations');
         $doctors = Doctor::get();
-
         return view('addpatient', ['locations' => $locations, 'doctors' => $doctors]);
     }
 
@@ -55,7 +54,7 @@ class PatientsController extends Controller
             'email',
             'phone'
         ));
-        return redirect('/addpatient');
+        return redirect('addpatient');
     }
 
     /**
@@ -83,7 +82,13 @@ class PatientsController extends Controller
         $patients = Patient::where('id', 'LIKE', '%' . $patient_id . '%')->get();
         $controls = Control::where('patient_id', 'LIKE', '%' . $patient_id . '%')->whereBetween('created_at', [$start_date, $end_date])->get();
 
-        return view('/controlsshow', ['patients' => $patients, 'controls' => $controls]);
+        return view('controlsshow', ['patients' => $patients, 'controls' => $controls]);
+    }
+
+    public function patientsshow()
+    {
+        $patients = Patient::get();
+        return view('patientsshow', ['patients' => $patients]);
     }
 
     /**

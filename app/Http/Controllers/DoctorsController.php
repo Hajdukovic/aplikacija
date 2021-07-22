@@ -54,6 +54,11 @@ class DoctorsController extends Controller
         return redirect('/adddoctor');
     }
 
+    public function doctorsshow()
+    {
+        $doctors = Doctor::get();
+        return view('doctorsshow', ['doctors' => $doctors]);
+    }
     /**
      * Display the specified resource.
      *

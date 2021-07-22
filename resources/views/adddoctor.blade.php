@@ -73,7 +73,7 @@
                             <br /><br /><br />
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" name="save" class="btn btn-primary">
+                                    <button type="submit" name="save" class="btn btn-primary" onclick="obavijest()">
                                         Dodaj liječnika
                                     </button>
                                 </div>
@@ -83,8 +83,11 @@
             </div>
             <br />
         </div>
-
-
     </div>
 </div>
+<script>
+function obavijest() {
+  alert("Uspiješno ste dodali novog doktora!");
+}
+</script>
 @endsection

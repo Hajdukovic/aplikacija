@@ -12,6 +12,5 @@
 	   <tr><th>Uloga: </th><td>{{ Auth::user()->role==1?'Pacijent':'Liječnik' }} </td></tr>
 	   <tr><th>Datum registracije: </th><td>{{strftime('%d.%m.%G. %H:%M',strtotime(Auth::user()->created_at)) }} </td></tr>
 	</table>
-	
 
 @endsection
