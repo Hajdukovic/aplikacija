@@ -16,6 +16,13 @@
                         </div>
                         <br />
                         <div class="form-group row">
+                            <label for="control_date" class="col-md-4 col-form-label text-md-right">Datum kontrole:</label>
+                            <div class="col-md-6">
+                                <input type="date" id="control_date" name="control_date" required pattern="\d{4}-\d{2}-\d{2}">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group row">
                             <label for="description" class="col-md-4 col-form-label text-md-right">Opis kontrole:</label>
                             <div class="col-md-6">
                                 <textarea id="description" type="text" class="form-control" name="description" required autofocus rows="10"></textarea>
@@ -61,7 +68,7 @@
 </div>
 <script>
 function obavijest() {
-  alert("Uspiješno ste dodali novou kontrolu!");
+  alert("Dodali ste novu kontrolu!");
 }
 </script>
 @endsection

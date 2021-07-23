@@ -21,7 +21,7 @@
             @else
             @foreach ($controls as $control)
             <tr>
-                <td>{{$control->created_at->format('d/m/Y') }}</td>
+                <td>{{Carbon\Carbon::parse($control->control_date)->format('d-m-Y')}}</td>
                 <td>{{$control->name}}</td>
                 <td>{{$control->description}}</td>
             </tr>

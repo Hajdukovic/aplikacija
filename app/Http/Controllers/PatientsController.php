@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Patient;
 use App\Models\Doctor;
 use App\Models\Control;
+use App\Models\Location;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -67,8 +68,8 @@ class PatientsController extends Controller
     {
         $user = Auth::user();
         $user_email = $user->email;
-        $id = Doctor::where('email', 'LIKE', '%' . $user_email . '%')->first()->id;
-        $patients = Patient::where('doctor_id', 'LIKE', '%' . $id . '%')->get();
+        $id = Doctor::where('email', 'LIKE', $user_email )->first()->id;
+        $patients = Patient::where('doctor_id', 'LIKE', $id )->get();
 
         return view('patient', ['patients' => $patients]);
     }
@@ -79,8 +80,8 @@ class PatientsController extends Controller
         $start_date = $request->control_date1;
         $end_date = $request->control_date2;
 
-        $patients = Patient::where('id', 'LIKE', '%' . $patient_id . '%')->get();
-        $controls = Control::where('patient_id', 'LIKE', '%' . $patient_id . '%')->whereBetween('created_at', [$start_date, $end_date])->get();
+        $patients = Patient::where('id', 'LIKE', $patient_id )->get();
+        $controls = Control::where('patient_id', 'LIKE',  $patient_id)->whereBetween('created_at', [$start_date, $end_date])->get();
 
         return view('controlsshow', ['patients' => $patients, 'controls' => $controls]);
     }
@@ -99,7 +100,14 @@ class PatientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $doctors = Doctor::get();
+        $locations = Location::get();
+        $patient = Patient::where('id', 'LIKE', $id)->first();
+        return view('patientedit', [
+            'patient' => $patient,
+            'doctors' => $doctors,
+            'locations' => $locations
+        ]);
     }
 
     /**
@@ -111,7 +119,17 @@ class PatientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $patient = Patient::find($id);
+        $patient->name = $request->name;
+        $patient->surname = $request->surname;
+        $patient->birth_date = $request->birth_date;
+        $patient->address = $request->address;
+        $patient->location_id = $request->location_id;
+        $patient->doctor_id = $request->doctor_id;
+        $patient->email = $request->email;
+        $patient->phone = $request->phone;
+        $patient->save();
+        return redirect('/');
     }
 
     /**

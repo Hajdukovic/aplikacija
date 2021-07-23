@@ -51,7 +51,7 @@ class DoctorsController extends Controller
             'email',
             'phone'
         ));
-        return redirect('/adddoctor');
+        return redirect('adddoctor');
     }
 
     public function doctorsshow()

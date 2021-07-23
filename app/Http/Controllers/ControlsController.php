@@ -7,6 +7,7 @@ use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Control;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ControlsController extends Controller
 {
@@ -22,14 +23,18 @@ class ControlsController extends Controller
             $user = Auth::user();
         $user_email = $user->email;
         if (Auth::user()->role == 1) {
-            $id = Patient::where('email', 'LIKE', '%' . $user_email . '%')->first()->id;
-            $controls = Control::where('patient_id', 'LIKE', '%' . $id . '%')->get();
+            $id = Patient::where('email', 'LIKE', $user_email)->first()->id;
+            $controls = Control::where('patient_id', 'LIKE', $id)->whereDate('control_date', '<=', Carbon::now())->get();
+            $newcontrols = Control::where('patient_id', 'LIKE', $id)->whereDate('control_date', '>', Carbon::now())->get();
+
         } else {
-            $id = Doctor::where('email', 'LIKE', '%' . $user_email . '%')->first()->id;
-            $controls = Control::where('doctor_id', 'LIKE', '%' . $id . '%')->get();
+            $id = Doctor::where('email', 'LIKE', $user_email)->first()->id;
+            $controls = Control::where('doctor_id', 'LIKE', $id )->whereDate('control_date', '<=', Carbon::now())->get();
+            $newcontrols = Control::where('doctor_id', 'LIKE', $id)->whereDate('control_date', '>', Carbon::now())->get();
+
         };
 
-        return view('/controls', ['controls' => $controls]);
+        return view('controls', ['controls' => $controls, 'newcontrols' => $newcontrols]);
         }   
         else return view ('login');     
         
@@ -45,14 +50,14 @@ class ControlsController extends Controller
         $user = Auth::user();
         $user_email = $user->email;
         if (Auth::user()->role == 1) {
-            $id = Patient::where('email', 'LIKE', '%' . $user_email . '%')->first()->id;
-            $patients = Patient::where('id', 'LIKE', '%' . $id . '%')->get();
-            $doctor_id = Patient::where('id', 'LIKE', '%' . $id . '%')->first()->doctor_id;
-            $doctors = Doctor::where('id', 'LIKE', '%' . $doctor_id . '%')->get();
+            $id = Patient::where('email', 'LIKE', $user_email)->first()->id;
+            $patients = Patient::where('id', 'LIKE',  $id)->get();
+            $doctor_id = Patient::where('id', 'LIKE',  $id)->first()->doctor_id;
+            $doctors = Doctor::where('id', 'LIKE',  $doctor_id)->get();
         } else {
-            $id = Doctor::where('email', 'LIKE', '%' . $user_email . '%')->first()->id;
-            $patients = Patient::where('doctor_id', 'LIKE', '%' . $id . '%')->get();
-            $doctors = Doctor::where('id', 'LIKE', '%' . $id . '%')->get();
+            $id = Doctor::where('email', 'LIKE',  $user_email)->first()->id;
+            $patients = Patient::where('doctor_id', 'LIKE', $id)->get();
+            $doctors = Doctor::where('id', 'LIKE', $id)->get();
         }
 
         return view('addcontrol', ['patients' => $patients, 'doctors' => $doctors]);
@@ -68,11 +73,12 @@ class ControlsController extends Controller
     {
         Control::create($request->only(
             'name',
+            'control_date',
             'description',
             'patient_id',
             'doctor_id',
         ));
-        return redirect('/addcontrol');
+        return redirect('addcontrol');
     }
 
     /**

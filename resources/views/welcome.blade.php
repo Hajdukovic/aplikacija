@@ -14,7 +14,7 @@
     </div>
 
     <div style="position: relative;  top: 50%; left: 30%;"><img src="../pictures/pretraga.png" alt="pretraga">
-        <a href="{{ route('patient.show') }}" style="width: 20%" class="btn btn-outline-primary" role="button" aria-pressed="true">Pretraga pacijenata</a>
+        <a href="{{ route('patient.show') }}" style="width: 20%" class="btn btn-outline-primary" role="button" aria-pressed="true">Pretraga kontrola po pacijentu</a>
     </div>
     @endif
     @if (Auth::user()->role == 1)

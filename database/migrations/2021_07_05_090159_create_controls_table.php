@@ -16,6 +16,7 @@ class CreateControlsTable extends Migration
         Schema::create('controls', function (Blueprint $table) {
             $table->id();
             $table->string('name',30);
+            $table->date('control_date');
             $table->string('description',3000);
             $table->unsignedBigInteger('patient_id')->index();
             $table->unsignedBigInteger('doctor_id')->index();

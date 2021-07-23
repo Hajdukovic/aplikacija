@@ -15,6 +15,7 @@
                 <th>Liječnik</th>
                 <th>E-mail</th>
                 <th>Kontakt broj</th>
+                <th>Izmijena</th>
             </tr>
             @foreach ($patients as $patient)
             <tr>
@@ -27,6 +28,11 @@
                 <td>{{$patient->doctor->name}} {{$patient->doctor->surname}}</td>
                 <td>{{$patient->email}}</td>
                 <td>{{$patient->phone}}</td>
+                <td>
+                    <form action="" method="GET">
+                        <a href="{{route('patient.edit', $patient->id)}}" class="btn btn-primary" role="button">Izmijeni</a>
+                    </form>
+                </td>
             </tr>
             @endforeach
         </table>

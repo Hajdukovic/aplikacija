@@ -5,7 +5,7 @@
     <br />
 
     <br />
-    <h3>Popis kontrola</h3>
+    <h3>Buduće kontrole</h3>
     <div>
         <table class="table sortable">
             <tr>
@@ -14,21 +14,35 @@
                 <th>Opis</th>
                 <th>Pacijent</th>
             </tr>
-            @if(is_null($controls))
+            @foreach ($newcontrols as $newcontrol)
             <tr>
-                <td>Ne postoji zabilježena kontrola</td>
+                <td>{{Carbon\Carbon::parse($newcontrol->control_date)->format('d-m-Y')}}</td>
+                <td>{{$newcontrol->name}}</td>
+                <td>{{$newcontrol->description}}</td>
+                <td>{{$newcontrol->patient->name}} {{$newcontrol->patient->surname}}</td>
             </tr>
-            @else
+            @endforeach
+        </table>
+    </div>
+
+    <br />
+    <h3>Provedene kontrole</h3>
+    <div>
+        <table class="table sortable">
+            <tr>
+                <th>Datum</th>
+                <th>Naziv</th>
+                <th>Opis</th>
+                <th>Pacijent</th>
+            </tr>
             @foreach ($controls as $control)
             <tr>
-                <td>{{$control->created_at->format('d/m/Y') }}</td>
+                <td>{{Carbon\Carbon::parse($control->control_date)->format('d-m-Y')}}</td>
                 <td>{{$control->name}}</td>
                 <td>{{$control->description}}</td>
                 <td>{{$control->patient->name}} {{$control->patient->surname}}</td>
             </tr>
             @endforeach
-            @endif
-
         </table>
     </div>
 </fieldset>

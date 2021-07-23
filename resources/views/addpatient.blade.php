@@ -22,7 +22,6 @@
                             </div>
                         </div>
                         <br />
-
                         <div class="form-group row">
                             <label for="birth_date" class="col-md-4 col-form-label text-md-right">Datum rođenja:</label>
                             <div class="col-md-6">
@@ -62,10 +61,10 @@
                         <div class="form-group row">
                             <label for="gender" class="col-md-4 col-form-label text-md-right">Spol:</label>
                             <div class="col-md-6">
-                                <input type="radio" id="musko" name="gender" value="musko">
-                                <label for="gender">Muško</label>
-                                <input type="radio" id="zensko" name="gender" value="zensko">
-                                <label for="gender">Žensko</label>
+                                <input type="radio" id="musko" name="gender" value="M">
+                                <label for="gender">M</label>
+                                <input type="radio" id="zensko" name="gender" value="Ž">
+                                <label for="gender">Ž</label>
                             </div>
                             <br />
                             <div class="form-group row">
@@ -98,7 +97,7 @@
 </div>
 <script>
 function obavijest() {
-  alert("Uspiješno ste dodali novog pacijenta!");
+  alert("Dodali ste novog pacijenta!");
 }
 </script>
 @endsection
