@@ -9,7 +9,7 @@
                     <form method="POST" action="{{ route('control.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Naziv:</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Razlog dolaska:</label>
                             <div class="col-md-6">
                                 <input id="ime" type="text" class="form-control" name="name" required autofocus>
                             </div>
@@ -23,12 +23,21 @@
                         </div>
                         <br />
                         <div class="form-group row">
-                            <label for="description" class="col-md-4 col-form-label text-md-right">Opis kontrole:</label>
+                            <label for="description" class="col-md-4 col-form-label text-md-right">Nalaz i mišljenje:</label>
                             <div class="col-md-6">
                                 <textarea id="description" type="text" class="form-control" name="description" required autofocus rows="10"></textarea>
                             </div>
                         </div>
                         <br />
+                        @if (Auth::user()->role == 0)
+                        <div class="form-group row">
+                            <label for="status" class="col-md-4 col-form-label text-md-right">Status i zaključak liječnika:</label>
+                            <div class="col-md-6">
+                                <textarea id="status" type="text" class="form-control" name="status" required autofocus rows="10"></textarea>
+                            </div>
+                        </div>
+                        <br />
+                        @endif
                         <div class="form-group row">
                             <label for="patient_id" class="col-md-4 col-form-label text-md-right">Pacijent:</label>
                             <div class="col-md-6">

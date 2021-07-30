@@ -18,26 +18,21 @@ class ControlsController extends Controller
      */
     public function index()
     {
-        if (Auth::user()){
+        if (Auth::user()) {
 
             $user = Auth::user();
-        $user_email = $user->email;
-        if (Auth::user()->role == 1) {
-            $id = Patient::where('email', 'LIKE', $user_email)->first()->id;
-            $controls = Control::where('patient_id', 'LIKE', $id)->whereDate('control_date', '<=', Carbon::now())->get();
-            $newcontrols = Control::where('patient_id', 'LIKE', $id)->whereDate('control_date', '>', Carbon::now())->get();
-
-        } else {
-            $id = Doctor::where('email', 'LIKE', $user_email)->first()->id;
-            $controls = Control::where('doctor_id', 'LIKE', $id )->whereDate('control_date', '<=', Carbon::now())->get();
-            $newcontrols = Control::where('doctor_id', 'LIKE', $id)->whereDate('control_date', '>', Carbon::now())->get();
-
-        };
-
-        return view('controls', ['controls' => $controls, 'newcontrols' => $newcontrols]);
-        }   
-        else return view ('login');     
-        
+            $user_email = $user->email;
+            if (Auth::user()->role == 1) {
+                $id = Patient::where('email', 'LIKE', $user_email)->first()->id;
+                $controls = Control::where('patient_id', 'LIKE', $id)->whereDate('control_date', '<=', Carbon::now())->sortable()->paginate(255);
+                $newcontrols = Control::where('patient_id', 'LIKE', $id)->whereDate('control_date', '>', Carbon::now())->sortable()->paginate(255);
+            } else {
+                $id = Doctor::where('email', 'LIKE', $user_email)->first()->id;
+                $controls = Control::where('doctor_id', 'LIKE', $id)->whereDate('control_date', '<=', Carbon::now())->sortable()->paginate(255);
+                $newcontrols = Control::where('doctor_id', 'LIKE', $id)->whereDate('control_date', '>', Carbon::now())->sortable()->paginate(255);
+            };
+            return view('controls', compact(['controls', 'newcontrols']));
+        } else return view('login');
     }
 
     /**
@@ -59,7 +54,6 @@ class ControlsController extends Controller
             $patients = Patient::where('doctor_id', 'LIKE', $id)->get();
             $doctors = Doctor::where('id', 'LIKE', $id)->get();
         }
-
         return view('addcontrol', ['patients' => $patients, 'doctors' => $doctors]);
     }
 
@@ -75,6 +69,7 @@ class ControlsController extends Controller
             'name',
             'control_date',
             'description',
+            'status',
             'patient_id',
             'doctor_id',
         ));
@@ -98,9 +93,11 @@ class ControlsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id, $patient_id)
+    {        
+        $patient = Patient::where('id', 'LIKE', $patient_id)->first();
+        $control = Control::where('id', 'LIKE', $id)->first();
+        return view('editcontrol', ['control' => $control, 'patient' => $patient]);
     }
 
     /**
@@ -112,8 +109,13 @@ class ControlsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $control = Control::find($id);
+        $control->name = $request->name;
+        $control->control_date = $request->control_date; 
+        $control->description = $request->description;
+        $control->status = $request->status;
+        $control->save();
+        return redirect('/');    }
 
     /**
      * Remove the specified resource from storage.

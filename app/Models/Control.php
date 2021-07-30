@@ -4,11 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
+
 
 class Control extends Model
 {
+    use Sortable;
     use HasFactory;
-    protected $fillable = ['name', 'control_date', 'description', 'patient_id', 'doctor_id'];
+    protected $fillable = ['name', 'control_date', 'description', 'status', 'patient_id', 'doctor_id'];
+
+    protected $sortable = ['name', 'control_date', 'description', 'status', 'patient_id'];
 
     public function patient()
     {

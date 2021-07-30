@@ -43,6 +43,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/controlsshow', 'App\Http\Controllers\PatientsController@controlsshow')->name('control.showall');
     Route::get('/addcontrol', 'App\Http\Controllers\ControlsController@create')->name('control.create');
     Route::post('/addcontrol', 'App\Http\Controllers\ControlsController@store')->name('control.store');
+    Route::get('/editcontrol/{id}/{patient_id}', 'App\Http\Controllers\ControlsController@edit')->name('control.edit');
+    Route::post('/updatecontrol/{id}', 'App\Http\Controllers\ControlsController@update')->name('control.update');
 
     Route::get('/patientsshow', 'App\Http\Controllers\PatientsController@patientsshow')->name('patients.showall');
     Route::get('/doctorsshow', 'App\Http\Controllers\DoctorsController@doctorsshow')->name('doctors.showall');
