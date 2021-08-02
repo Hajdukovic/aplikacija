@@ -2,7 +2,7 @@
 @section('content')
 
 <fieldset style="width: 100%;  padding: 30px;  box-sizing: border-box;">
-    <a href="{{ route('control.create') }}" style="width: 25%" class="btn btn-outline-primary" role="button" aria-pressed="true">Dodaj kontrolu</a>
+    <a href="{{ route('control.create') }}" style="width: 100%" class="btn btn-outline-primary" role="button" aria-pressed="true">Dodaj kontrolu</a>
     <br />
     <br />
     <h3>Buduće kontrole</h3>
@@ -16,7 +16,9 @@
                 <th>@sortablelink('patient_id', 'Pacijent')</th>
                 @endif
                 <th>@sortablelink('status', 'Status i zaključak liječnika')</th>
+                @if (Auth::user()->role == 0)
                 <th>Izmijeni</th>
+                @endif
             </tr>
             @foreach ($newcontrols as $newcontrol)
             <tr>
@@ -25,11 +27,13 @@
                 <td>{{$newcontrol->description}}</td>
                 @if (Auth::user()->role == 0)
                 <td>{{$newcontrol->patient->name}} {{$newcontrol->patient->surname}}</td>
+                @endif
                 @if (is_null($newcontrol->status))
                 <td style="color:red;">Liječnik nije unijeo status</td>
                 @else
                 <td>{{$newcontrol->status}}</td>
                 @endif
+                @if (Auth::user()->role == 0)
                 <td>
                     <form action="" method="GET">
                         <a href="{{route('control.edit', [$newcontrol->id, $newcontrol->patient_id])}}" class="btn btn-primary" role="button">Izmijeni</a>
@@ -52,7 +56,9 @@
                 <th>@sortablelink('patient_id', 'Pacijent')</th>
                 @endif
                 <th>@sortablelink('status', 'Status i zaključak liječnika')</th>
+                @if (Auth::user()->role == 0)
                 <th>Izmijeni</th>
+                @endif
             </tr>
             @foreach ($controls as $control)
             <tr>
@@ -61,11 +67,13 @@
                 <td>{{$control->description}}</td>
                 @if (Auth::user()->role == 0)
                 <td>{{$control->patient->name}} {{$control->patient->surname}}</td>
+                @endif
                 @if (is_null($control->status))
                 <td style="color:red;">Liječnik nije unijeo status</td>
                 @else
                 <td>{{$control->status}}</td>
                 @endif
+                @if (Auth::user()->role == 0)
                 <td>
                     <form action="" method="GET">
                         <a href="{{route('control.edit', [$control->id, $control->patient_id])}}" class="btn btn-primary" role="button">Izmijeni</a>

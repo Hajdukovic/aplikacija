@@ -74,18 +74,6 @@ class PatientsController extends Controller
         return view('patient', ['patients' => $patients]);
     }
 
-    public function controlsshow(Request $request)
-    {
-        $patient_id = $request->patient_id;
-        $start_date = $request->control_date1;
-        $end_date = $request->control_date2;
-
-        $patients = Patient::where('id', 'LIKE', $patient_id)->get();
-        $controls = Control::where('patient_id', 'LIKE',  $patient_id)->whereBetween('created_at', [$start_date, $end_date])->get();
-
-        return view('controlsshow', ['patients' => $patients, 'controls' => $controls]);
-    }
-
     public function patientsshow()
     {
         $patients = Patient::get();

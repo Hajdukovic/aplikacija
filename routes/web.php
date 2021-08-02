@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/adddoctor', 'App\Http\Controllers\DoctorsController@store')->name('doctor.store');
 
     Route::get('/controls', 'App\Http\Controllers\ControlsController@index')->name('control.show');
-    Route::post('/controlsshow', 'App\Http\Controllers\PatientsController@controlsshow')->name('control.showall');
+    Route::post('/controlsshow', 'App\Http\Controllers\ControlsController@controlsshow')->name('control.showall');
     Route::get('/addcontrol', 'App\Http\Controllers\ControlsController@create')->name('control.create');
     Route::post('/addcontrol', 'App\Http\Controllers\ControlsController@store')->name('control.store');
     Route::get('/editcontrol/{id}/{patient_id}', 'App\Http\Controllers\ControlsController@edit')->name('control.edit');

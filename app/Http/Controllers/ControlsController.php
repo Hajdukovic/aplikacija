@@ -35,6 +35,18 @@ class ControlsController extends Controller
         } else return view('login');
     }
 
+    public function controlsshow(Request $request)
+    {
+        $patient_id = $request->patient_id;
+        $start_date = $request->control_date1;
+        $end_date = $request->control_date2;
+
+        $patients = Patient::where('id', 'LIKE', $patient_id)->get();
+        $controls = Control::where('patient_id', 'LIKE',  $patient_id)->whereBetween('created_at', [$start_date, $end_date])->get();
+
+        return view('controlsshow', ['patients' => $patients, 'controls' => $controls]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -115,7 +127,8 @@ class ControlsController extends Controller
         $control->description = $request->description;
         $control->status = $request->status;
         $control->save();
-        return redirect('/');    }
+        return redirect('/');    
+    }
 
     /**
      * Remove the specified resource from storage.

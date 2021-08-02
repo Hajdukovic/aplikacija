@@ -37,9 +37,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
                     </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -50,13 +48,9 @@
                         </li>
                         @endif
                         @if (Auth::check())
-
                         @endif
-
                         @else
-
                         <li style="width:150px">
-
                             <a href="{{ url('/') }}"> <img src="../pictures/pocetna.png" width="50" height="50"> Početna</a>
                         </li>
                         <li style="width:150px">
@@ -72,7 +66,6 @@
                             <a href="{{ route('doctor.create') }}" class="text-sm text-gray-700 "><img src="../pictures/patient.png" width="50" height="50">Dodaj liječnika</a>
                         </li>
                         @endif
-
                         @if (Auth::user()->role == 2)
                         @if (Route::has('register'))
                         <li style="width:250px">
@@ -80,7 +73,6 @@
                         </li>
                         @endif
                         @endif
-
                         <div style="width:150px">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <img src="../pictures/odjava.png" width="50" height="50">
@@ -91,7 +83,7 @@
                                 @csrf
                             </form>
                         </div>
-                        <li style="width:200px">
+                        <li style="width:300px">
                             <a> <img src="../pictures/pozdrav.png" width="50" height="50">Pozdrav, {{ Auth::user()->name }}</a>
                         </li>
                         @endguest
@@ -99,7 +91,6 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>
