@@ -23,7 +23,7 @@
 
 </head>
 
-<body style='background-image: url("../pictures/pozadina.png"); background-position: center; background-repeat: no-repeat; background-size: cover;'>
+<body style='background-image: url("../public/pictures/pozadina.png"); background-position: center; background-repeat: no-repeat; background-size: cover;'>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -51,31 +51,31 @@
                         @endif
                         @else
                         <li style="width:150px">
-                            <a href="{{ url('/') }}"> <img src="../pictures/pocetna.png" width="50" height="50"> Početna</a>
+                            <a href="{{ url('/') }}"> <img src="../public/pictures/pocetna.png" width="50" height="50"> Početna</a>
                         </li>
                         <li style="width:150px">
-                            <a href="{{ route('profile.show') }}"><img src="../pictures/profil.png" width="50" height="50">Profil</a>
+                            <a href="{{ route('profile.show') }}"><img src="../public/pictures/profil.png" width="50" height="50">Profil</a>
                         </li>
                         @if (Auth::user()->role == 0)
                         <li style="width:200px">
-                            <a href="{{ route('patient.create') }}" class="text-sm text-gray-700 "><img src="../pictures/patient.png" width="50" height="50">Dodaj pacijenta</a>
+                            <a href="{{ route('patient.create') }}" class="text-sm text-gray-700 "><img src="../public/pictures/patient.png" width="50" height="50">Dodaj pacijenta</a>
                         </li>
                         @endif
                         @if (Auth::user()->role == 2)
                         <li style="width:200px">
-                            <a href="{{ route('doctor.create') }}" class="text-sm text-gray-700 "><img src="../pictures/patient.png" width="50" height="50">Dodaj liječnika</a>
+                            <a href="{{ route('doctor.create') }}" class="text-sm text-gray-700 "><img src="../public/pictures/patient.png" width="50" height="50">Dodaj liječnika</a>
                         </li>
                         @endif
                         @if (Auth::user()->role == 2)
                         @if (Route::has('register'))
                         <li style="width:250px">
-                            <a href="{{ route('register') }}" class="text-sm text-gray-700 "><img src="../pictures/patient.png" width="50" height="50">{{ __('Registracija korisnika') }}</a>
+                            <a href="{{ route('register') }}" class="text-sm text-gray-700 "><img src="../public/pictures/patient.png" width="50" height="50">{{ __('Registracija korisnika') }}</a>
                         </li>
                         @endif
                         @endif
                         <div style="width:150px">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <img src="../pictures/odjava.png" width="50" height="50">
+                                <img src="../public/pictures/odjava.png" width="50" height="50">
                                 {{ __('Odjava') }}
                             </a>
 
@@ -84,7 +84,7 @@
                             </form>
                         </div>
                         <li style="width:300px">
-                            <a> <img src="../pictures/pozdrav.png" width="50" height="50">Pozdrav, {{ Auth::user()->name }}</a>
+                            <a> <img src="../public/pictures/pozdrav.png" width="50" height="50">Pozdrav, {{ Auth::user()->name }}</a>
                         </li>
                         @endguest
                     </ul>

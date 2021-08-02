@@ -8,10 +8,10 @@
     <div>
         <table class="table">
             <tr>
-                <th>Datum</th>
-                <th>Razlog dolaska</th>
-                <th>Nalaz i mišljenje</th>
-                <th>Status i zaključak liječnika</th>
+                <th>@sortablelink('control_date', 'Datum')</th>
+                <th>@sortablelink('name', 'Razlog dolaska')</th>
+                <th>@sortablelink('description', 'Nalaz i mišljenje')</th>
+                <th>@sortablelink('status', 'Status i zaključak liječnika')</th>
                 <th>Izmijeni</th>
             </tr>
             @if(is_null($controls))
@@ -27,7 +27,7 @@
                 @if (is_null($control->status))
                 <td style="color:red;">Liječnik nije unijeo status</td>
                 @else
-                <td>{{$newcontrol->status}}</td>
+                <td>{{$control->status}}</td>
                 @endif
                 <td>
                     <form action="" method="GET">

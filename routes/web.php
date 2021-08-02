@@ -2,27 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Doctor;
-use App\Models\Patient;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
-
-
-
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -40,7 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/adddoctor', 'App\Http\Controllers\DoctorsController@store')->name('doctor.store');
 
     Route::get('/controls', 'App\Http\Controllers\ControlsController@index')->name('control.show');
-    Route::post('/controlsshow', 'App\Http\Controllers\ControlsController@controlsshow')->name('control.showall');
+    Route::get('/controlsshow', 'App\Http\Controllers\ControlsController@controlsshow')->name('control.showall');
     Route::get('/addcontrol', 'App\Http\Controllers\ControlsController@create')->name('control.create');
     Route::post('/addcontrol', 'App\Http\Controllers\ControlsController@store')->name('control.store');
     Route::get('/editcontrol/{id}/{patient_id}', 'App\Http\Controllers\ControlsController@edit')->name('control.edit');

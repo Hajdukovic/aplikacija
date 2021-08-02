@@ -24,12 +24,12 @@ class ControlsController extends Controller
             $user_email = $user->email;
             if (Auth::user()->role == 1) {
                 $id = Patient::where('email', 'LIKE', $user_email)->first()->id;
-                $controls = Control::where('patient_id', 'LIKE', $id)->whereDate('control_date', '<=', Carbon::now())->sortable()->paginate(255);
-                $newcontrols = Control::where('patient_id', 'LIKE', $id)->whereDate('control_date', '>', Carbon::now())->sortable()->paginate(255);
+                $controls = Control::where('patient_id', 'LIKE', $id)->whereDate('control_date', '<=', Carbon::now())->sortable()->paginate(2550);
+                $newcontrols = Control::where('patient_id', 'LIKE', $id)->whereDate('control_date', '>', Carbon::now())->sortable()->paginate(2550);
             } else {
                 $id = Doctor::where('email', 'LIKE', $user_email)->first()->id;
-                $controls = Control::where('doctor_id', 'LIKE', $id)->whereDate('control_date', '<=', Carbon::now())->sortable()->paginate(255);
-                $newcontrols = Control::where('doctor_id', 'LIKE', $id)->whereDate('control_date', '>', Carbon::now())->sortable()->paginate(255);
+                $controls = Control::where('doctor_id', 'LIKE', $id)->whereDate('control_date', '<=', Carbon::now())->sortable()->paginate(2550);
+                $newcontrols = Control::where('doctor_id', 'LIKE', $id)->whereDate('control_date', '>', Carbon::now())->sortable()->paginate(2550);
             };
             return view('controls', compact(['controls', 'newcontrols']));
         } else return view('login');
@@ -42,9 +42,9 @@ class ControlsController extends Controller
         $end_date = $request->control_date2;
 
         $patients = Patient::where('id', 'LIKE', $patient_id)->get();
-        $controls = Control::where('patient_id', 'LIKE',  $patient_id)->whereBetween('created_at', [$start_date, $end_date])->get();
+        $controls = Control::where('patient_id', 'LIKE',  $patient_id)->whereBetween('created_at', [$start_date, $end_date])->sortable()->paginate(255);
 
-        return view('controlsshow', ['patients' => $patients, 'controls' => $controls]);
+        return view('controlsshow', compact(['patients', 'controls']));
     }
 
     /**
@@ -106,7 +106,7 @@ class ControlsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id, $patient_id)
-    {        
+    {
         $patient = Patient::where('id', 'LIKE', $patient_id)->first();
         $control = Control::where('id', 'LIKE', $id)->first();
         return view('editcontrol', ['control' => $control, 'patient' => $patient]);
@@ -123,11 +123,11 @@ class ControlsController extends Controller
     {
         $control = Control::find($id);
         $control->name = $request->name;
-        $control->control_date = $request->control_date; 
+        $control->control_date = $request->control_date;
         $control->description = $request->description;
         $control->status = $request->status;
         $control->save();
-        return redirect('/');    
+        return redirect('/');
     }
 
     /**

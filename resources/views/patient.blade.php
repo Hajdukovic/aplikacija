@@ -1,13 +1,10 @@
 @extends('layouts.app')
 @section('content')
-
 @if (Auth::check())
-
 <fieldset style="width: 100%;  padding: 30px;  box-sizing: border-box;">
-
     <div>Molimo odaberite pacijenta i obavezno dodati vremenski period za koji želite ispis kontrola (OD kada - DO kada).</div>
     <br>
-    <form method="POST" action="{{route('control.showall')}}" enctype="multipart/form-data">
+    <form method="GET" action="{{route('control.showall')}}" enctype="multipart/form-data">
         @csrf
         <div class="form-group row" style="width: 50%; position: relative;  top: 50%; left: 30%;">
             <label for="patient_id" class="col-md-4 col-form-label text-md-right">Odabir pacijenta:</label>
@@ -20,7 +17,6 @@
             </div>
         </div>
         <br />
-
         <div class="form-group row" style="width: 55%; position: relative;  top: 50%; left: 30%;">
             <label for="" class="col-md-4 col-form-label text-md-right">Datum kontrole OD:</label>
             <div class="col-md-6">
@@ -44,8 +40,5 @@
         </div>
     </form>
 </fieldset>
-
-
-
 @endif
 @endsection('content')

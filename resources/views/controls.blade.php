@@ -9,15 +9,15 @@
     <div>
         <table class="table">
             <tr>
-                <th>@sortablelink('control_date', 'Datum')</th>
-                <th>@sortablelink('name', 'Razlog dolaska')</th>
+                <th style="width:150px">@sortablelink('control_date', 'Datum')</th>
+                <th style="width:200px">@sortablelink('name', 'Razlog dolaska')</th>
                 <th>@sortablelink('description', 'Nalaz i mišljenje')</th>
                 @if (Auth::user()->role == 0)
                 <th>@sortablelink('patient_id', 'Pacijent')</th>
                 @endif
-                <th>@sortablelink('status', 'Status i zaključak liječnika')</th>
+                <th style="width:300px">@sortablelink('status', 'Status i zaključak liječnika')</th>
                 @if (Auth::user()->role == 0)
-                <th>Izmijeni</th>
+                <th style="width:100px">Izmijeni</th>
                 @endif
             </tr>
             @foreach ($newcontrols as $newcontrol)
@@ -26,7 +26,7 @@
                 <td>{{$newcontrol->name}}</td>
                 <td>{{$newcontrol->description}}</td>
                 @if (Auth::user()->role == 0)
-                <td>{{$newcontrol->patient->name}} {{$newcontrol->patient->surname}}</td>
+                <td style="width:200px">{{$newcontrol->patient->name}} {{$newcontrol->patient->surname}}</td>
                 @endif
                 @if (is_null($newcontrol->status))
                 <td style="color:red;">Liječnik nije unijeo status</td>
@@ -49,15 +49,15 @@
     <div>
         <table class="table sortable">
             <tr>
-                <th>@sortablelink('control_date', 'Datum')</th>
-                <th>@sortablelink('name', 'Razlog dolaska')</th>
+                <th style="width:150px">@sortablelink('control_date', 'Datum')</th>
+                <th style="width:200px">@sortablelink('name', 'Razlog dolaska')</th>
                 <th>@sortablelink('description', 'Nalaz i mišljenje')</th>
                 @if (Auth::user()->role == 0)
-                <th>@sortablelink('patient_id', 'Pacijent')</th>
+                <th style="width:200px">@sortablelink('patient_id', 'Pacijent')</th>
                 @endif
-                <th>@sortablelink('status', 'Status i zaključak liječnika')</th>
+                <th style="width:300px">@sortablelink('status', 'Status i zaključak liječnika')</th>
                 @if (Auth::user()->role == 0)
-                <th>Izmijeni</th>
+                <th style="width:100px">Izmijeni</th>
                 @endif
             </tr>
             @foreach ($controls as $control)
@@ -85,5 +85,4 @@
         </table>
     </div>
 </fieldset>
-
 @endsection('content')
